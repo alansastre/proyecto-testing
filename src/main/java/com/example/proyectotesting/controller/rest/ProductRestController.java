@@ -24,6 +24,7 @@ import java.util.Optional;
 @RestController // rest
 public class ProductRestController {
 
+    private static final String PRODUCTS_URL = "/api/products";
     private ProductService productService; // dependencia
 
     public ProductRestController(ProductService productService) {
@@ -31,19 +32,19 @@ public class ProductRestController {
     }
 
     // metodos HTTP
-    @GetMapping("/api/products")
+    @GetMapping(PRODUCTS_URL)
     public List<Product> findAll(){
         return productService.findAll();
     }
 
-    @GetMapping("/api/products/{id}")
+    @GetMapping(PRODUCTS_URL + "/{id}")
     public ResponseEntity<Product> findOne(@PathVariable Long id){
         Optional<Product> productOpt = productService.findOne(id);
         return ResponseEntity.of(productOpt); // HTTP Status 200 si hay objeto en el Optional y 404 si no hay objeto en Optional
     }
 
 
-    @PostMapping("/api/products") // crear nuevos productos
+    @PostMapping(PRODUCTS_URL) // crear nuevos productos
     public ResponseEntity<Product> create(@RequestBody Product product){
         if(product.getId() != null) // si hay id entonces NO es creación
             return ResponseEntity.badRequest().build();
@@ -52,7 +53,7 @@ public class ProductRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(product); // HTTP Status es 201
     }
 
-    @PutMapping("/api/products") // actualizar un producto existente
+    @PutMapping(PRODUCTS_URL) // actualizar un producto existente
     public ResponseEntity<Product> update(@RequestBody Product product){
         if(product.getId() == null)
             return ResponseEntity.badRequest().build(); // HTTP Status 400 Bad Request
@@ -61,11 +62,11 @@ public class ProductRestController {
             return ResponseEntity.notFound().build();// HTTP Status 404 Not Found
 
         Product result = productService.save(product);
-        return ResponseEntity.ok(result); // HTTP Status es 200
+        return ResponseEntity.ok(result); // HTTP Status es 200 OK
     }
 
-    @DeleteMapping("/api/products/{id}")
-    public ResponseEntity<Product> delete(@PathVariable Long id){
+    @DeleteMapping(PRODUCTS_URL + "/{id}")
+    public ResponseEntity<Product> deleteById(@PathVariable Long id){
 
         if(!productService.existsById(id)) // si no hay id entonces NO se borra
             return ResponseEntity.notFound().build(); // HTTP Status es 404
@@ -78,7 +79,7 @@ public class ProductRestController {
 
     }
 
-    @DeleteMapping("/api/products")
+    @DeleteMapping(PRODUCTS_URL)
     public ResponseEntity<Product> deleteAll(){
 
         if(productService.deleteAll())
