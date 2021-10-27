@@ -49,7 +49,7 @@ public class ProductRestController {
             return ResponseEntity.badRequest().build();
 
         Product result = productService.save(product);
-        return ResponseEntity.ok(result); // HTTP Status es 200
+        return ResponseEntity.status(HttpStatus.CREATED).body(product); // HTTP Status es 201
     }
 
     @PutMapping("/api/products") // actualizar un producto existente
