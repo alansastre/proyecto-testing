@@ -126,7 +126,13 @@ class ProductRestControllerTest {
     }
 
 
+    @Test
+    void stringFormatTest(){
+        String result = String.format("Hola %s %s", "Alan", "Sastre");
+        System.out.println(result);
+        String result2 = "Hola " + "Alan " + "Sastre";
 
+    }
     @Test
     void update() {
         Product product = createDemoProduct();

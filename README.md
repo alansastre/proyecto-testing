@@ -1,3 +1,44 @@
+## Testing proyecto 
+
+* patterns: JUnit y Mockito
+* service: JUnit y Mockito
+* repository: @DataJpaTest y @Autowired y JUnit
+* controller: @SpringBootTest y TestRestTemplate
+* entities: Se prueba indirectamente al testear todos los demás
+
+2 enfoques: 
+
+1. Cada paquete es testeado por una persona del equipo
+2. Cada persona testea las clases de una entidad completa desde la entidad hasta el controlador: 
+   1. Category
+   2. CategoryRepository
+   3. CategoryService y CategoryServiceImpl
+   4. CategoryMvcController y CategoryRestController
+
+Recomendación: enfoque 2.
+
+## Testing Controladores 
+
+1. RestTemplateBuilder y TestRestTemplate
+2. Crear petición con el objeto TestRestTemplate
+   1. GET `getForEntity()`
+      1. findAll 
+      2. findOneOk
+      3. findOneNotFound
+   2. POST `postForEntity()` Requiere crear el json a enviar
+      1. createOK
+      2. createBadRequest
+   3. PUT `exchange()`
+      1. update()
+   4. DELETE `delete()` y `exchange()`
+      1. deleteById()
+      2. deleteAll()
+3. Procesar ResponseEntity (respuesta)
+   1. getStatusCodeValue
+   2. getStatusCode
+   3. Aserciones sobre los datos que vienen en el cuerpo de la respuesta `getBody()`
+
+
 Proceso para ahora: 
 1. Crear Issue en GitHub
 2. Implementar cambio solicitado
