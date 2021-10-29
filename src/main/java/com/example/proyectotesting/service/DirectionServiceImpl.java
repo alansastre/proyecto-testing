@@ -15,10 +15,10 @@ public class DirectionServiceImpl implements DirectionService{
     public DirectionServiceImpl(DirectionRepository directionRepository){
         this.directionRepository = directionRepository;
     }
-  
+
     @Override
     public List<Direction> findAll() {
-        List<Direction> answer = new ArrayList<Direction>();
+        List<Direction> answer;
         answer = directionRepository.findAll();
         if (answer.size() > 0)
             System.out.println("Empty Table");
@@ -26,24 +26,28 @@ public class DirectionServiceImpl implements DirectionService{
     }
 
     @Override
-      public Optional<Direction> findOne(Long id) {
-          try {
-              Optional optionalanswer = directionRepository.findById(id);
-              if (optionalanswer.isEmpty())
-                  System.out.println("No result");
-              return optionalanswer;
-          }
-          catch(IllegalArgumentException error){
-              error.printStackTrace();
-              return Optional.empty();
-          }
+    public Optional<Direction> findOne(Long id) {
+        try {
+            Optional<Direction> optionalanswer = directionRepository.findById(id);
+            if (optionalanswer.isEmpty())
+                System.out.println("No result");
+            return optionalanswer;
+        }
+        catch(IllegalArgumentException error){
+            error.printStackTrace();
+            return Optional.empty();
+        }
+    }
+    @Override
+    public boolean existsById(Long id) {
+        return directionRepository.existsById(id);
     }
     @Override
     public Direction save(Direction direction) {
         try {
             if (direction != null) {
 
-                 return directionRepository.save(direction);
+                return directionRepository.save(direction);
             } else {
                 throw new IllegalArgumentException();
             }
@@ -71,7 +75,7 @@ public class DirectionServiceImpl implements DirectionService{
                 System.out.println("No result");
                 throw new IllegalArgumentException();
             }
-            Direction directionans = (Direction) directionoptional.get();
+            Direction directionans = directionoptional.get();
             directionRepository.delete(directionans);
             return true;
         }
@@ -85,7 +89,7 @@ public class DirectionServiceImpl implements DirectionService{
     public boolean deleteAll() {
 
         try {
-         directionRepository.deleteAll();
+            directionRepository.deleteAll();
             return true;
         }
         catch(Exception error){
@@ -101,4 +105,5 @@ public class DirectionServiceImpl implements DirectionService{
             return result;
         return directionRepository.findByCityAndCountry(city,country);
     }
+
 }

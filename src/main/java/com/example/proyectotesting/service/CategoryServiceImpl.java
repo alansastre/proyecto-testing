@@ -32,7 +32,10 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findById(id);
 
     }
-
+    @Override
+    public boolean existsById(Long id) {
+        return categoryRepository.existsById(id);
+    }
     @Override
     public Optional<Category> findOne(String color) {
         if (color == null)
@@ -65,5 +68,15 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return true;
 
+    }
+    @Override
+    public boolean deleteAll() {
+        try{
+            categoryRepository.deleteAll();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }

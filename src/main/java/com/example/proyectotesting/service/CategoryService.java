@@ -11,6 +11,8 @@ public interface CategoryService {
 
     Optional<Category> findOne(Long id);
 
+    boolean existsById(Long id);
+
     Optional<Category> findOne(String color);
 
     Category save(Category category);
@@ -18,4 +20,5 @@ public interface CategoryService {
     long count();
 
     boolean deleteById(Long id);
+    boolean deleteAll();
 }
