@@ -4,7 +4,7 @@ public class Calculator {
 
 	private static Calculator calculadora;
 	
-	public Calculator() {
+	private Calculator() {
 		
 	}
 	

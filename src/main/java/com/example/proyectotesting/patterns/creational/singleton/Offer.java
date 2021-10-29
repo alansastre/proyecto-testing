@@ -7,7 +7,7 @@ public class Offer {
 	
 	List<Double> prices = new ArrayList<>();
 	
-	Calculator calculator = new Calculator();
+	Calculator calculator = Calculator.getCalculator();
 	
 	public double calculateTotalOffer(){
 		
