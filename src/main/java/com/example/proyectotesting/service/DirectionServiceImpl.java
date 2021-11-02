@@ -20,7 +20,7 @@ public class DirectionServiceImpl implements DirectionService{
     public List<Direction> findAll() {
         List<Direction> answer;
         answer = directionRepository.findAll();
-        if (answer.size() > 0)
+        if (answer.size() < 1)
             System.out.println("Empty Table");
         return answer;
     }
