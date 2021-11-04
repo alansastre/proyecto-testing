@@ -48,7 +48,7 @@
 					</td>
 					<td>
 						<c:forEach items="${product.categories}"  var="category">
-						<span class="badge bg-primary">${category.name}</span>
+						<span id="category-${category.id}" class="badge bg-primary">${category.name}</span>
 						
 						</c:forEach>
 					</td>
