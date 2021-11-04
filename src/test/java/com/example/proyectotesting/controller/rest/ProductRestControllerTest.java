@@ -12,6 +12,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductRestControllerTest {
 
     private static final String PRODUCTS_URL = "/api/products";
+
     private TestRestTemplate testRestTemplate;
 
     @Autowired
@@ -40,6 +43,8 @@ class ProductRestControllerTest {
         createDemoProduct();
         createDemoProduct();
 
+        // Ejecutar findAll GET http://localhost:8080/api/products
+        // Pone Product[].class porque la respuesta nos devuelve una array json de objetos de la clase Product
         ResponseEntity<Product[]> response = testRestTemplate.getForEntity(PRODUCTS_URL, Product[].class);
 
         assertEquals(200, response.getStatusCodeValue());
@@ -47,14 +52,21 @@ class ProductRestControllerTest {
         assertTrue(response.hasBody());
         assertNotNull(response.getBody());
 
-        List<Product> products = List.of(response.getBody());
-        assertNotNull(products);
-        assertTrue(products.size() >= 2);
+        // El resultado de la petición HTTP será un array json de productos, lo que se convierte a array []
+        Product[] products = response.getBody();
+        // Convertimos el array normal [] a ArrayList
+        List<Product> productsArrayList = Arrays.asList(products);
+
+        assertNotNull(productsArrayList);
+        assertTrue(productsArrayList.size() >= 2); // comprueba que hay al menos 2 productos porque hemos creado anteriormente 2 productos
     }
 
     @Test
     void findOneOk() {
         Product product = createDemoProduct();
+
+        // http://localhost:8080/api/products/1
+        // Pone Product.class porque devuelve un objeto json de la clase Product
         ResponseEntity<Product> response =
                 testRestTemplate.getForEntity(PRODUCTS_URL + "/" + product.getId(), Product.class);
 
@@ -71,6 +83,7 @@ class ProductRestControllerTest {
 
     @Test
     void findOneNotFound() {
+        // http://localhost:8080/api/products/99999
         ResponseEntity<Product> response =
                 testRestTemplate.getForEntity(PRODUCTS_URL + "/99999", Product.class);
 
@@ -102,6 +115,8 @@ class ProductRestControllerTest {
 
         Product product = response.getBody();
         assertNotNull(product);
+        assertNotNull(product.getId());
+        assertNotEquals(0L, product.getId());
         assertEquals("Product creado desde JUnit", product.getName());
     }
 

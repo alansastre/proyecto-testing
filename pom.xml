@@ -18,11 +18,18 @@
 	</properties>
 	<dependencies>
 		<!-- JSP -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
+			<version>9.0.54</version>
 		</dependency>
+
+		<!--		<dependency>-->
+<!--			<groupId>org.apache.tomcat.embed</groupId>-->
+<!--			<artifactId>tomcat-embed-jasper</artifactId>-->
+<!--			<scope>provided</scope>-->
+<!--		</dependency>-->
 		<!-- jstl for jsp -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
