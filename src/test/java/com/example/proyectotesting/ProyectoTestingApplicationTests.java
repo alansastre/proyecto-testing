@@ -12,6 +12,9 @@ class ProyectoTestingApplicationTests {
 	}
 
 
+	@Test
+	void prueba() {
 
+	}
 
 }
