@@ -75,3 +75,23 @@ Capa controlador
 * ManufacturerRestController --> Alicia
 * DirectionRestController --> María Ángeles
 * CategoryRestController --> David
+
+## Selenium 
+
+Productos
+1. Añadir producto: product-edit.jsp 
+2. Borrar productos
+3. Ver
+4. Editar: product-edit.jsp 
+5. Borrar
+6. Manufacturer Link: comprobar el enlace a la pantalla fabricante desde el listado de productos
+7. Categories column: comprobar que aparecen varias categorías en una misma columna
+
+Manufacturer:
+1. Añadir fabricante
+2. Borrar fabricantes 
+3. Ver
+4. Editar
+5. Borrar 
+6. Comprobar enlaces a la pantalla Productos desde listado fabricantes
+
