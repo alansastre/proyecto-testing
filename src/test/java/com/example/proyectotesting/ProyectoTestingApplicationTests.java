@@ -14,7 +14,7 @@ class ProyectoTestingApplicationTests {
 
 	@Test
 	void prueba() {
-
+		System.out.println("eee");
 	}
 
 }
