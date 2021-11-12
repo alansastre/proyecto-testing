@@ -5,10 +5,45 @@ import com.example.proyectotesting.patterns.behavioral.iterator.BookShop;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookShopTest {
+
+    @Test
+    void test1(){
+        Book libro1 = new Book("Book1", "Author1", 1991);
+        Book libro2 = new Book();
+        libro2.setAuthor("Author2");
+        libro2.setIsbn("Book2");
+        libro2.setYear(1992);
+
+        BookShop shop = new BookShop();
+        shop.addBook(libro1);
+        shop.addBook(libro2);
+
+        Iterator<Book> iterator = shop.iterator();
+
+        // libro 1
+        assertTrue(iterator.hasNext());
+        Book bookIter1 = iterator.next();
+        assertNotNull(bookIter1);
+        assertEquals("Book1", bookIter1.getIsbn());
+
+        // libro 2
+        assertTrue(iterator.hasNext());
+        Book bookIter2 = iterator.next();
+        assertNotNull(bookIter2);
+        assertEquals("Book2", bookIter2.getIsbn());
+
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, () -> iterator.next());
+    }
+
+
+
+
 
     @Test
     void addBook() {
