@@ -20,12 +20,13 @@
 					<p><b>Nombre</b>: ${manufacturer.name}</p>
 					<p><b>CIF</b>: ${manufacturer.cif}</p>
 					<p><b>Nº Empleados</b>: ${manufacturer.numEmployees}</p>
-					
+					<p><b>Año</b>: ${manufacturer.year}</p>
+
 					<h3>Dirección</h3>
-					<p> <b>Calle</b>: ${manufacturer.year}</p>
-					<p><b>Código postal</b>: ${manufacturer.year}</p>
-					<p><b>Ciudad</b>: ${manufacturer.year}</p>
-					<p><b>País</b>: ${manufacturer.year}</p>
+					<p> <b>Calle</b>: ${manufacturer.direction.street}</p>
+					<p><b>Código postal</b>: ${manufacturer.direction.postalCode}</p>
+					<p><b>Ciudad</b>: ${manufacturer.direction.city}</p>
+					<p><b>País</b>: ${manufacturer.direction.country}</p>
 					
 					<h3>Productos fabricados</h3>
 					
