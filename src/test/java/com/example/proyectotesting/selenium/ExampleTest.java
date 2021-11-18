@@ -41,11 +41,12 @@ public class ExampleTest {
 
     @Test
     void tagNameSelector(){
-        driver.get("https://github.com/mozilla");
+//        driver.get("https://github.com/mozilla");
+        driver.get("https://proyecto-testing.herokuapp.com");
 
         WebElement h1 = driver.findElement(By.tagName("h1"));
         String h1Text = h1.getText();
-        assertEquals("Mozilla", h1Text);
+        assertEquals("Products Directory", h1Text);
     }
 
 }
