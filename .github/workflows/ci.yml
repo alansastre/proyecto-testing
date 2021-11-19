@@ -2,7 +2,8 @@ name: CI Java maven
 on:
   push:
     branches:
-      - selenium, lambdatest
+      - selenium
+      - lambdatest
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
