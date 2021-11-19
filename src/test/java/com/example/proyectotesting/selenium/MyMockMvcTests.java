@@ -1,5 +1,6 @@
 package com.example.proyectotesting.selenium;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ class MyMockMvcTests {
     @Autowired
     MockMvc mvc;
 
+    @Disabled("Disabled until check lambdatest")
     @Test
     void obtenerListaTest() throws Exception {
 
@@ -33,6 +35,7 @@ class MyMockMvcTests {
 
     }
 
+    @Disabled("Disabled until check lambdatest")
     @Test
     void crearProductoTest() throws Exception {
         mvc.perform(
