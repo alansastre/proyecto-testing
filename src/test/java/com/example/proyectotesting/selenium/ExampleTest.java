@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 public class ExampleTest {
 
     // Navegador
@@ -52,13 +51,17 @@ public class ExampleTest {
 
     @Test
     void tagNameSelector(){
-//        driver.get("https://github.com/mozilla");
-        driver.get("https://testing-alansastre.herokuapp.com/products");
-//        driver.get("http://localhost:8080/");
+////        driver.get("https://github.com/mozilla");
+//        driver.get("https://testing-alansastre.herokuapp.com/products");
+////        driver.get("http://localhost:8080/");
+//
+//        WebElement h1 = driver.findElement(By.tagName("h1"));
+//        String h1Text = h1.getText();
+//        assertEquals("Products Directory", h1Text);
 
-        WebElement h1 = driver.findElement(By.tagName("h1"));
-        String h1Text = h1.getText();
-        assertEquals("Products Directory", h1Text);
+        driver.get("https://testing-alansastre.herokuapp.com/products");
+
+        assertEquals("Products Directory", driver.findElement(By.tagName("h1")).getText());
     }
 
 }

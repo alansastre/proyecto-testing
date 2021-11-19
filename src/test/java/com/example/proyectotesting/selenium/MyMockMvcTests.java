@@ -36,7 +36,11 @@ class MyMockMvcTests {
     @Test
     void crearProductoTest() throws Exception {
         mvc.perform(
-                    post("/products").param("name", "producto prueba")
+                    post("/products")
+                            .param("name", "producto prueba")
+                            .param("description", "Descripción producto")
+                            .param("price", "88.77")
+                            .param("quantity", "8")
                 ).andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/products"));
     }
