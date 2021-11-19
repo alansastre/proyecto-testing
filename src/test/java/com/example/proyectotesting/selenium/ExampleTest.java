@@ -9,9 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SpringBootTest
 public class ExampleTest {
 
     // Navegador
@@ -24,6 +26,9 @@ public class ExampleTest {
 //        String url = dir + driverUrl;
 //        System.setProperty("webdriver.chrome.driver", url);
 //        driver = new ChromeDriver(); // Google Chrome
+
+        System.getenv().forEach((key, value) -> System.out.println(key + " " + value));
+        System.getProperties().forEach((key, value) -> System.out.println(key + " " + value));
 
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -43,6 +48,7 @@ public class ExampleTest {
     void tagNameSelector(){
 //        driver.get("https://github.com/mozilla");
         driver.get("https://proyecto-testing.herokuapp.com");
+//        driver.get("http://localhost:8080/");
 
         WebElement h1 = driver.findElement(By.tagName("h1"));
         String h1Text = h1.getText();
