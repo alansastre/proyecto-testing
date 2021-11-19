@@ -21,21 +21,27 @@ public class ExampleTest {
 
     @BeforeEach
     void setUp() {
-//        String dir = System.getProperty("user.dir"); // ruta del proyecto
-//        String driverUrl = "/drivers/chromedriver.exe";
-//        String url = dir + driverUrl;
-//        System.setProperty("webdriver.chrome.driver", url);
-//        driver = new ChromeDriver(); // Google Chrome
 
         System.getenv().forEach((key, value) -> System.out.println(key + " " + value));
         System.getProperties().forEach((key, value) -> System.out.println(key + " " + value));
 
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
-        driver = new ChromeDriver(options);
+        if(System.getProperties().get("os.name").equals("Linux")){
+            System.out.println("Configurando Navegador Chrome Headless para CI");
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
+        }else{
+            System.out.println("Configurando Navegador Chrome desde carpeta drivers para testing en desarrollo");
+            String dir = System.getProperty("user.dir"); // ruta del proyecto
+            String driverUrl = "/drivers/chromedriver.exe";
+            String url = dir + driverUrl;
+            System.setProperty("webdriver.chrome.driver", url);
+            driver = new ChromeDriver(); // Google Chrome
+        }
+
 
     }
 
@@ -47,7 +53,7 @@ public class ExampleTest {
     @Test
     void tagNameSelector(){
 //        driver.get("https://github.com/mozilla");
-        driver.get("https://proyecto-testing.herokuapp.com");
+        driver.get("https://testing-alansastre.herokuapp.com/products");
 //        driver.get("http://localhost:8080/");
 
         WebElement h1 = driver.findElement(By.tagName("h1"));
