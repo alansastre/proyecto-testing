@@ -33,6 +33,7 @@ class MyMockMvcTests {
                 .andExpect(view().name("product-list")) // comprobar los atributos cargados en el modelo
                 .andExpect( forwardedUrl("/WEB-INF/views/product-list.jsp")); // vista que se mostrará
 
+
     }
 
     @Disabled("Disabled until check lambdatest")
@@ -46,5 +47,41 @@ class MyMockMvcTests {
                             .param("quantity", "8")
                 ).andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/products"));
+    }
+
+
+    @Test
+    void viewProductNotFound() throws Exception {
+
+        mvc.perform(get("/products/1/view"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(model().attributeExists("error"));
+    }
+
+    @Test
+    void viewProductNull() throws Exception {
+
+        mvc.perform(get("/products/null/view"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void viewProductOK() throws Exception {
+
+        mvc.perform(get("/products/9/view"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("product"))
+                .andExpect(view().name("product-view"));
+    }
+
+    @Test
+    void editProductOK() throws Exception {
+
+        mvc.perform(get("/products/9/edit"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("product"))
+                .andExpect(model().attributeExists("manufacturers"))
+                .andExpect(model().attributeExists("categories"))
+                .andExpect(view().name("product-edit"));
     }
 }
